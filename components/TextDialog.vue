@@ -49,9 +49,9 @@ export default {
           value: this.usrInput,
         },
       }
-      if (this.usrInput!=null) {
-        console.log(this.usrInput)
-        // location.reload()
+      if (this.usrInput != null) {
+        //console.log(this.usrInput)
+        this.$emit('item-Changed', this.value, this.usrInput)
       }
     },
   },

@@ -7,13 +7,23 @@
       <pre
         class="config pa-2"
       ><b>Servername:</b>      <p>{{serverConfiguration.name}}</p></pre>
-      <TextDialog class="ma-2 alignright" :field="'Change Servername'" :value="'name'" />
+      <TextDialog
+        class="ma-2 alignright"
+        :field="'Change Servername'"
+        :value="'name'"
+        @item-Changed="updateContent"
+      />
     </v-row>
     <v-row class="box ma-2">
       <pre
         class="config pa-2"
       ><b>Uplink:</b>          <p>{{serverConfiguration.uplink}}</p></pre>
-      <TextDialog class="ma-2 alignright" :field="'Change Uplink'" :value="'uplink'"/>
+      <TextDialog
+        class="ma-2 alignright"
+        :field="'Change Uplink'"
+        :value="'uplink'"
+        @item-Changed="updateContent"
+      />
     </v-row>
     <v-row class="box ma-2">
       <pre
@@ -24,7 +34,12 @@
       <pre
         class="config pa-2"
       ><b>Location:</b>        <p>{{serverConfiguration.location}}</p></pre>
-      <TextDialog class="ma-2 alignright" :field="'Change Location'" :value="'location'" />
+      <TextDialog
+        class="ma-2 alignright"
+        :field="'Change Location'"
+        :value="'location'"
+        @item-Changed="updateContent"
+      />
     </v-row>
     <v-row>
       <b style="font-size: 1.5rem">Forwarding Rules</b>
@@ -56,7 +71,6 @@ export default {
     TextDialog,
     Rules,
   },
-  props:[],
   data() {
     return {
       serverConfiguration: {},
@@ -79,6 +93,26 @@ export default {
     } catch (error) {
       console.log(error)
     }
+  },
+  methods: {
+    updateContent(){
+      setTimeout(this.updateConfig,2000)
+    },
+    async updateConfig(item, newItem) {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'qwertyuiop',
+        },
+      }
+      try {
+        const res = await axios.get(this.url + this.$route.params.id, config)
+        this.serverConfiguration = res.data
+        this.$forceUpdate()
+      } catch (error) {
+        console.log(error)
+      }
+    },
   },
 }
 </script>
