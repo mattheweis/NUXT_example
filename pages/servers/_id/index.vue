@@ -7,11 +7,13 @@
       <pre
         class="config pa-2"
       ><b>Servername:</b>      {{serverConfiguration.name}}</pre>
+      <TextDialog class="ma-2 alignright" :field="'Change Servername'" />
     </v-row>
     <v-row class="box ma-2">
       <pre
         class="config pa-2"
       ><b>Uplink:</b>          {{serverConfiguration.uplink}}</pre>
+      <TextDialog class="ma-2 alignright" :field="'Change Uplink'" />
     </v-row>
     <v-row class="box ma-2">
       <pre
@@ -22,9 +24,16 @@
       <pre
         class="config pa-2"
       ><b>Location:</b>        {{serverConfiguration.location}}</pre>
+      <TextDialog class="ma-2 alignright" :field="'Change Location:'" />
     </v-row>
-    <v-row class="">
+    <v-row>
       <b style="font-size: 1.5rem">Forwarding Rules</b>
+    </v-row>
+    <v-row class="ma-2">
+      <v-col class="box">External IP</v-col>
+      <v-col class="box">Protocol</v-col>
+      <v-col class="box">External Port</v-col>
+      <v-col class="box">Internal Port</v-col>
     </v-row>
     <Rules
       v-for="(index, i) in serverConfiguration.rules"
@@ -33,7 +42,7 @@
       :proto="index.proto"
       :eport="index.eport"
       :iport="index.iport"
-      class="box ma-2"
+      class="ma-2"
     />
   </v-container>
 </template>
@@ -41,8 +50,10 @@
 <script>
 import axios from 'axios'
 import Rules from '../../../components/Rules.vue'
+import TextDialog from '../../../components/TextDialog.vue'
 export default {
   components: {
+    TextDialog,
     Rules,
   },
   data() {
@@ -50,6 +61,7 @@ export default {
       serverConfiguration: {},
       url:
         'https://92b68d42-d685-4146-abd7-1afd0113c712.mock.pstmn.io/api/v1/client/backends?id=',
+      state: null,
     }
   },
   async created() {
