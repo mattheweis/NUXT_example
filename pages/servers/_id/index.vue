@@ -1,24 +1,30 @@
 <template>
   <v-container>
-    <v-row>
+    <v-row class="">
+      <b style="font-size: 1.5rem">Server Configuration</b>
+    </v-row>
+    <v-row class="box ma-2">
       <pre
         class="config pa-2"
       ><b>Servername:</b>      {{serverConfiguration.name}}</pre>
     </v-row>
-    <v-row>
+    <v-row class="box ma-2">
       <pre
         class="config pa-2"
       ><b>Uplink:</b>          {{serverConfiguration.uplink}}</pre>
     </v-row>
-    <v-row>
+    <v-row class="box ma-2">
       <pre
         class="config pa-2"
       ><b>Status:</b>          {{serverConfiguration.status}}</pre>
     </v-row>
-    <v-row>
+    <v-row class="box ma-2">
       <pre
         class="config pa-2"
       ><b>Location:</b>        {{serverConfiguration.location}}</pre>
+    </v-row>
+    <v-row class="">
+      <b style="font-size: 1.5rem">Forwarding Rules</b>
     </v-row>
     <Rules
       v-for="(index, i) in serverConfiguration.rules"
@@ -27,6 +33,7 @@
       :proto="index.proto"
       :eport="index.eport"
       :iport="index.iport"
+      class="box ma-2"
     />
   </v-container>
 </template>
@@ -66,5 +73,8 @@ export default {
 <style>
 .config {
   font-size: 1.3rem;
+}
+.box {
+  border: 2px solid #0f4c75;
 }
 </style>
