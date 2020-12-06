@@ -8,14 +8,15 @@
       </template>
       <v-card>
         <v-card-title class="headline">
-          {{field}}
+          {{ this.field }}
         </v-card-title>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-text-field label="New Configuration"></v-text-field>
-          <v-btn color="green darken-1" text @click="dialog = false">
-            Done
-          </v-btn>
+          <v-text-field
+            label="New Configuration"
+            v-model="usrInput"
+          ></v-text-field>
+          <v-btn color="green darken-1" text @click="patchData"> Done </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -23,15 +24,38 @@
 </template>
 
 <script>
-  export default {
-      name:"TextDialog",
-      props:['field'],
-    data () {
-      return {
-        dialog: false,
+import axios from 'axios'
+
+export default {
+  name: 'TextDialog',
+  props: ['field', 'value'],
+  data() {
+    return {
+      dialog: false,
+      usrInput: null,
+    }
+  },
+  methods: {
+    patchData() {
+      this.dialog = false
+      const config = {
+        headers: {
+          'Content-Type': 'application/json-patch+json',
+          Authorization: 'qwertyuiop',
+        },
+        data: {
+          op: 'update',
+          key: this.value,
+          value: this.usrInput,
+        },
+      }
+      if (this.usrInput!=null) {
+        console.log(this.usrInput)
+        // location.reload()
       }
     },
-  }
+  },
+}
 </script>
 
 <style>

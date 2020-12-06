@@ -6,25 +6,25 @@
     <v-row class="box ma-2">
       <pre
         class="config pa-2"
-      ><b>Servername:</b>      {{serverConfiguration.name}}</pre>
-      <TextDialog class="ma-2 alignright" :field="'Change Servername'" />
+      ><b>Servername:</b>      <p>{{serverConfiguration.name}}</p></pre>
+      <TextDialog class="ma-2 alignright" :field="'Change Servername'" :value="'name'" />
     </v-row>
     <v-row class="box ma-2">
       <pre
         class="config pa-2"
-      ><b>Uplink:</b>          {{serverConfiguration.uplink}}</pre>
-      <TextDialog class="ma-2 alignright" :field="'Change Uplink'" />
+      ><b>Uplink:</b>          <p>{{serverConfiguration.uplink}}</p></pre>
+      <TextDialog class="ma-2 alignright" :field="'Change Uplink'" :value="'uplink'"/>
     </v-row>
     <v-row class="box ma-2">
       <pre
         class="config pa-2"
-      ><b>Status:</b>          {{serverConfiguration.status}}</pre>
+      ><b>Status:</b>          <p>{{serverConfiguration.status}}</p></pre>
     </v-row>
     <v-row class="box ma-2">
       <pre
         class="config pa-2"
-      ><b>Location:</b>        {{serverConfiguration.location}}</pre>
-      <TextDialog class="ma-2 alignright" :field="'Change Location:'" />
+      ><b>Location:</b>        <p>{{serverConfiguration.location}}</p></pre>
+      <TextDialog class="ma-2 alignright" :field="'Change Location'" :value="'location'" />
     </v-row>
     <v-row>
       <b style="font-size: 1.5rem">Forwarding Rules</b>
@@ -56,6 +56,7 @@ export default {
     TextDialog,
     Rules,
   },
+  props:[],
   data() {
     return {
       serverConfiguration: {},
