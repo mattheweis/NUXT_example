@@ -16,7 +16,9 @@
             label="New Configuration"
             v-model="usrInput"
           ></v-text-field>
-          <v-btn color="green darken-1" text @click="patchData"> Done </v-btn>
+          <v-btn color="green darken-1" text @click="updataConfig">
+            Done
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -28,30 +30,36 @@ import axios from 'axios'
 
 export default {
   name: 'TextDialog',
-  props: ['field', 'value'],
+  props: ['field', 'jsKey'],
   data() {
     return {
       dialog: false,
       usrInput: null,
+      url: 'ChangeThistoAPI.com',
     }
   },
   methods: {
-    patchData() {
+    async updataConfig() {
       this.dialog = false
       const config = {
         headers: {
           'Content-Type': 'application/json-patch+json',
-          Authorization: 'qwertyuiop',
-        },
-        data: {
-          op: 'update',
-          key: this.value,
-          value: this.usrInput,
+          Authorization: 'qwertyuiop', //Change this
         },
       }
+      var info = {
+        cmd: [{
+          op: 'modify',
+          data: {},
+        }],
+      }
+      this.config.cmd.data[this.jsKey] = this.usrInput
+
       if (this.usrInput != null) {
-        //console.log(this.usrInput)
-        this.$emit('item-Changed', this.value, this.usrInput)
+        try {
+          let res = await axios.patch(this.url, info, config)
+        } catch (error) {}
+        this.$emit('item-Changed', this.jsKey, this.usrInput)
       }
     },
   },

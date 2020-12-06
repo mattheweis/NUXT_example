@@ -96,7 +96,7 @@ export default {
   },
   methods: {
     updateContent(){
-      setTimeout(this.updateConfig,2000)
+      setTimeout(this.updateConfig,1000)
     },
     async updateConfig(item, newItem) {
       const config = {
