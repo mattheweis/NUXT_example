@@ -32,6 +32,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title v-text="title" />
       <v-spacer />
+      <v-btn class="pa2 regis" color="#0f4c75" to="/registration">Register</v-btn>
       <v-btn class="pa2" color="#0f4c75" to="/login">Login</v-btn>
     </v-app-bar>
 
@@ -100,5 +101,9 @@ export default {
 <style>
 * {
   color: #bbe1fa;
+}
+.regis{
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 </style>
