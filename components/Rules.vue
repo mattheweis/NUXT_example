@@ -27,10 +27,16 @@
           >
         </v-col>
         <v-col class="col-auto">
-          <v-btn color="#2F9E00" dark><v-icon>mdi-grease-pencil</v-icon></v-btn>
+          <!-- <v-btn color="#2F9E00" dark><v-icon>mdi-grease-pencil</v-icon></v-btn> -->
+          <EditRules
+          :curIP="ext_ip"
+          :curProto="proto"
+          :curEport="eport"
+          :curIport="iport"
+          />
         </v-col>
         <v-col class="col-auto">
-          <v-btn color="error" dark @click="removeRule"> Remove Rule </v-btn>
+          <v-btn color="error" dark @click="removeRule"><v-icon>mdi-trash-can-outline</v-icon></v-btn>
         </v-col>
       </v-row>
     </v-container>
@@ -38,7 +44,11 @@
 </template>
 
 <script>
+import EditRules from "../components/EditRules.vue"
 export default {
+  components:{
+    EditRules
+  },
   name: 'Rules',
   props: ['ext_ip', 'proto', 'eport', 'iport'],
   data() {
@@ -63,10 +73,10 @@ export default {
         ],
       }
       info.cmd[0].data = {
-        "ext_ip": this.ext_ip,
-        "proto": this.proto,
-        "eport": this.eport,
-        "iport": this.iport,
+        ext_ip: this.ext_ip,
+        proto: this.proto,
+        eport: this.eport,
+        iport: this.iport,
       }
       console.log(info)
       // try {

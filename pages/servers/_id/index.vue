@@ -68,6 +68,7 @@ import axios from 'axios'
 import Rules from '../../../components/Rules.vue'
 import TextDialog from '../../../components/TextDialog.vue'
 import AddRulesDialog from '../../../components/AddRulesDialog.vue'
+
 export default {
   components: {
     TextDialog,

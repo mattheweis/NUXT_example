@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'AddRulesDialog',
   data() {
@@ -39,18 +40,37 @@ export default {
       newExtPort: null,
       newIntPort: null,
       dialog: false,
+      url: 'ChangeThis.com',
     }
   },
   methods: {
-    addNewRule() {
+    async addNewRule() {
       this.dialog = false
-      console.log(
-        'New Forwarding Rule',
-        this.newExtIP,
-        this.newProto,
-        this.newExtPort,
-        this.newIntPort
-      )
+      const config = {
+        headers: {
+          'Content-Type': 'application/json-patch+json',
+          Authorization: 'qwertyuiop', //Change this
+        },
+      }
+      var info = {
+        cmd: [
+          {
+            op: 'create_rule',
+            data: {
+              ext_ip: this.newExtIP,
+              proto: this.newProto,
+              eport: this.newExtPort,
+              iport: this.newIntPort,
+            },
+          },
+        ],
+      }
+      console.log(info.cmd[0])
+      try {
+        let res = await axios.patch(this.url, info, config)
+      } catch (error) {
+        console.log(error)
+      }
     },
   },
 }
