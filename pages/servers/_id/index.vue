@@ -43,13 +43,14 @@
     </v-row>
     <v-row>
       <b style="font-size: 1.5rem">Forwarding Rules</b>
+      <AddRulesDialog/>
     </v-row>
-    <v-row class="ma-2">
+    <!-- <v-row class="ma-2">
       <v-col class="box">External IP</v-col>
       <v-col class="box">Protocol</v-col>
       <v-col class="box">External Port</v-col>
       <v-col class="box">Internal Port</v-col>
-    </v-row>
+    </v-row> -->
     <Rules
       v-for="(index, i) in serverConfiguration.rules"
       :key="i"
@@ -66,10 +67,12 @@
 import axios from 'axios'
 import Rules from '../../../components/Rules.vue'
 import TextDialog from '../../../components/TextDialog.vue'
+import AddRulesDialog from "../../../components/AddRulesDialog.vue"
 export default {
   components: {
     TextDialog,
     Rules,
+    AddRulesDialog,
   },
   data() {
     return {

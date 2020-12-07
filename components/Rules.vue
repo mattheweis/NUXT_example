@@ -3,17 +3,23 @@
     <v-container>
       <v-row>
         <v-col class="box"
-          ><h3>{{ ext_ip }}</h3></v-col
+          ><h3>External Address:  {{ ext_ip }}</h3></v-col
         >
         <v-col class="box">
-          <h3>{{ proto }}</h3></v-col
+          <h3>Protocol:           {{ proto }}</h3></v-col
         >
         <v-col class="box"
-          ><h3>{{ eport }}</h3></v-col
+          ><h3>ExternalPort:      {{ eport }}</h3></v-col
         >
         <v-col class="box"
-          ><h3>{{ iport }}</h3></v-col
-        >
+          ><h3>InternalPort:      {{ iport }}</h3>
+        </v-col>
+        <v-col>
+          <v-btn color="error" dark> Remove Rule </v-btn>
+        </v-col>
+        <v-col>
+          <v-btn color="#2F9E00" dark> Edit Rule </v-btn>
+        </v-col>
       </v-row>
     </v-container>
   </div>
