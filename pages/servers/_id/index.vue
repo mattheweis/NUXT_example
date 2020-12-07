@@ -43,7 +43,7 @@
     </v-row>
     <v-row>
       <b style="font-size: 1.5rem">Forwarding Rules</b>
-      <AddRulesDialog/>
+      <AddRulesDialog />
     </v-row>
     <!-- <v-row class="ma-2">
       <v-col class="box">External IP</v-col>
@@ -67,7 +67,7 @@
 import axios from 'axios'
 import Rules from '../../../components/Rules.vue'
 import TextDialog from '../../../components/TextDialog.vue'
-import AddRulesDialog from "../../../components/AddRulesDialog.vue"
+import AddRulesDialog from '../../../components/AddRulesDialog.vue'
 export default {
   components: {
     TextDialog,
@@ -92,14 +92,14 @@ export default {
     try {
       const res = await axios.get(this.url + this.$route.params.id, config)
       this.serverConfiguration = res.data
-      console.log("ServerIDPage:",this.serverConfiguration)
+      console.log('ServerIDPage:', this.serverConfiguration)
     } catch (error) {
       console.log(error)
     }
   },
   methods: {
-    updateContent(){
-      setTimeout(this.updateConfig,1000)
+    updateContent() {
+      setTimeout(this.updateConfig, 1000)
     },
     async updateConfig(item, newItem) {
       const config = {

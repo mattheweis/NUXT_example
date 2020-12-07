@@ -16,7 +16,7 @@
             label="New Configuration"
             v-model="usrInput"
           ></v-text-field>
-          <v-btn color="green darken-1" text @click="updataConfig">
+          <v-btn color="green darken-1" text @click="updateConfig">
             Done
           </v-btn>
         </v-card-actions>
@@ -39,7 +39,7 @@ export default {
     }
   },
   methods: {
-    async updataConfig() {
+    async updateConfig() {
       this.dialog = false
       const config = {
         headers: {
