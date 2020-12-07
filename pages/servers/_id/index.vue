@@ -78,16 +78,15 @@ export default {
   data() {
     return {
       serverConfiguration: {},
-      url:
-        'https://92b68d42-d685-4146-abd7-1afd0113c712.mock.pstmn.io/api/v1/client/backends?id=',
+      url:'https://api.quix.click/api/v1/client/backends?id=',
       state: null,
+      Authorization: 'c34c2762e35dad4683db651f67f70d23'
     }
   },
   async created() {
     const config = {
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'qwertyuiop',
+        Authorization: `token ${this.Authorization}`,
       },
     }
     try {

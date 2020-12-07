@@ -32,8 +32,15 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title v-text="title" />
       <v-spacer />
-      <v-btn class="pa2 regis" color="#0f4c75" to="/registration">Register</v-btn>
-      <v-btn class="pa2" color="#0f4c75" to="/login">Login</v-btn>
+      <div v-if="$auth.loggedIn">
+        <v-btn class="pa2" color="#0f4c75">Logout</v-btn>
+      </div>
+      <div v-else>
+        <v-btn class="pa2 regis" color="#0f4c75" to="/registration"
+          >Register</v-btn
+        >
+        <v-btn class="pa2" color="#0f4c75" to="/login">Login</v-btn>
+      </div>
     </v-app-bar>
 
     <v-main>
@@ -102,7 +109,7 @@ export default {
 * {
   color: #bbe1fa;
 }
-.regis{
+.regis {
   margin-left: 1rem;
   margin-right: 1rem;
 }

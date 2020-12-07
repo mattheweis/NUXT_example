@@ -40,20 +40,16 @@ export default {
   methods: {
     async getToken() {
       const logindata = {
-        username: this.username,
-        password: this.password,
+        username: 'poiler22',
+        password: 'bright01',
       }
       try {
         let res = await axios.post(this.url, logindata)
-        document.cookie = 'quixUserToken=' + String(res.data.token)
+        //document.cookie = 'quixUserToken=' + String(res.data.token)
+        console.log('Cookies', res.data.token)
       } catch (error) {
         console.log(error)
       }
-    },
-    getCookie(name) {
-      const value = `; ${document.cookie}`
-      const parts = value.split(`; ${name}=`)
-      if (parts.length === 2) return parts.pop().split(';').shift()
     },
   },
 }
