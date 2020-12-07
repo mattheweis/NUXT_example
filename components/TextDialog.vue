@@ -48,12 +48,15 @@ export default {
         },
       }
       var info = {
-        cmd: [{
-          op: 'modify',
-          data: {},
-        }],
+        cmd: [
+          {
+            op: 'modify',
+            data: {},
+          },
+        ],
       }
-      this.config.cmd.data[this.jsKey] = this.usrInput
+      info.cmd[0].data[this.jsKey] = this.usrInput
+      console.log(info)
 
       if (this.usrInput != null) {
         try {

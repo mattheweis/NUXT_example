@@ -10,7 +10,7 @@
       <TextDialog
         class="ma-2 alignright"
         :field="'Change Servername'"
-        :value="'name'"
+        :jsKey="'name'"
         @item-Changed="updateContent"
       />
     </v-row>
@@ -21,7 +21,7 @@
       <TextDialog
         class="ma-2 alignright"
         :field="'Change Uplink'"
-        :value="'uplink'"
+        :jsKey="'uplink'"
         @item-Changed="updateContent"
       />
     </v-row>
@@ -37,7 +37,7 @@
       <TextDialog
         class="ma-2 alignright"
         :field="'Change Location'"
-        :value="'location'"
+        :jsKey="'location'"
         @item-Changed="updateContent"
       />
     </v-row>
@@ -89,7 +89,7 @@ export default {
     try {
       const res = await axios.get(this.url + this.$route.params.id, config)
       this.serverConfiguration = res.data
-      console.log(this.serverConfiguration)
+      console.log("ServerIDPage:",this.serverConfiguration)
     } catch (error) {
       console.log(error)
     }
