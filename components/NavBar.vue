@@ -33,7 +33,7 @@
       <v-toolbar-title v-text="title" />
       <v-spacer />
       <div v-if="$auth.loggedIn">
-        <v-btn class="pa2" color="#0f4c75">Logout</v-btn>
+        <v-btn class="pa2" color="#0f4c75" @click="logout">Logout</v-btn>
       </div>
       <div v-else>
         <v-btn class="pa2 regis" color="#0f4c75" to="/registration"
@@ -101,6 +101,13 @@ export default {
     return {
       title: 'Quix',
     }
+  },
+  methods: {
+    async logout() {
+      await this.$auth.logout()
+      this.$router.push('/login')
+      this.$forceUpdate()
+    },
   },
 }
 </script>

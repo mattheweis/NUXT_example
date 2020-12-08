@@ -19,7 +19,7 @@
       </v-form>
     </v-card-text>
     <v-card-actions>
-      <v-btn color="#0f4c75" :disabled="!isValid" @click="getToken"
+      <v-btn color="#0f4c75" :disabled="!isValid" @click="loginUser"
         >Login</v-btn
       >
     </v-card-actions>
@@ -33,20 +33,24 @@ export default {
     return {
       username: null,
       password: null,
+
+      mockLogin: {
+        username: 'matty',
+        password: 'matty01',
+      },
       isValid: null,
       url: 'https://api.quix.click/api/v1/client/auth',
     }
   },
   methods: {
-    async getToken() {
-      const logindata = {
-        username: 'poiler22',
-        password: 'bright01',
-      }
+    async loginUser() {
       try {
-        let res = await axios.post(this.url, logindata)
-        //document.cookie = 'quixUserToken=' + String(res.data.token)
-        console.log('Cookies', res.data.token)
+        let res = await this.$auth.loginWith('local', {
+          data: {"username":this.username,"password":this.password}
+        })
+        this.$router.push('/servers')
+        this.$forceUpdate()
+        console.log("Login Page:",res)
       } catch (error) {
         console.log(error)
       }

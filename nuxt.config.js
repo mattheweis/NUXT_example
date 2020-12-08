@@ -40,7 +40,9 @@ export default {
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {},
+  axios: {
+    baseURL: 'https://api.quix.click/'
+  },
 
   // Vuetify module configuration (https://go.nuxtjs.dev/config-vuetify)
   vuetify: {
@@ -63,5 +65,21 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+  },
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          required: false,
+          type: false
+        },
+        endpoints: {
+          login: { url: '/api/v1/client/auth', method: 'post' },
+          user: false,
+          logout: false
+        }
+      }
+    }
   }
+
 }
