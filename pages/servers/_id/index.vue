@@ -80,7 +80,7 @@ export default {
       serverConfiguration: {},
       url:'https://api.quix.click/api/v1/client/backends?id=',
       state: null,
-      Authorization: 'e1756c05b7effa8e097893c78491bda1'
+      Authorization: this.$store.state.token
     }
   },
   async created() {

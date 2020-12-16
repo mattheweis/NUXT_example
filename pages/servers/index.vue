@@ -24,7 +24,7 @@ export default {
     return {
       names: [],
       url: 'https://api.quix.click/api/v1/client/backends',
-      Authorization: 'e1756c05b7effa8e097893c78491bda1'
+      Authorization: this.$store.state.token
     }
   },
   async created() {
@@ -39,7 +39,7 @@ export default {
           "Authorization":`token ${this.Authorization}`
         }
       })
-      console.log("Debug Login:",this.$auth.strategy.token.get())
+      console.log(this.Authorization)
       this.names=res.data.data
     } catch (error) {
       console.log(error)

@@ -46,14 +46,19 @@ export default {
     async loginUser() {
       try {
         let res = await this.$auth.loginWith('local', {
-          data: {"username":this.username,"password":this.password}
+          data: { username: this.username, password: this.password },
         })
         this.$router.push('/servers')
         this.$forceUpdate()
-        console.log("Login Page:",res)
+        // console.log('Login Page:', res)
+        this.updateToken(res.data.token)
+
       } catch (error) {
         console.log(error)
       }
+    },
+    async updateToken(data) {
+      this.$store.commit("setToken",data)
     },
   },
 }
