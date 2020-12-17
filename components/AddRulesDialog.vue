@@ -67,6 +67,7 @@ export default {
         ],
       }
       console.log(typeof this.newExtIP, this.newExtIP)
+      console.log("TOKEN",this.Authorization)
       const test = {
         cmd: [
           {

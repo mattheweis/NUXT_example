@@ -29,14 +29,16 @@
         <v-col class="col-auto">
           <!-- <v-btn color="#2F9E00" dark><v-icon>mdi-grease-pencil</v-icon></v-btn> -->
           <EditRules
-          :curIP="ext_ip"
-          :curProto="proto"
-          :curEport="eport"
-          :curIport="iport"
+            :curIP="ext_ip"
+            :curProto="proto"
+            :curEport="eport"
+            :curIport="iport"
           />
         </v-col>
         <v-col class="col-auto">
-          <v-btn color="error" dark @click="removeRule"><v-icon>mdi-trash-can-outline</v-icon></v-btn>
+          <v-btn color="error" dark @click="removeRule"
+            ><v-icon>mdi-trash-can-outline</v-icon></v-btn
+          >
         </v-col>
       </v-row>
     </v-container>
@@ -44,24 +46,26 @@
 </template>
 
 <script>
-import EditRules from "../components/EditRules.vue"
+import EditRules from '../components/EditRules.vue'
+import axios from 'axios'
 export default {
-  components:{
-    EditRules
+  components: {
+    EditRules,
   },
   name: 'Rules',
   props: ['ext_ip', 'proto', 'eport', 'iport'],
   data() {
     return {
-      url: 'ChangeThis.com',
+      url: 'https://api.quix.click/api/v1/client/backends/modify?id=',
+      Authorization: this.$auth.$storage.getState('_token.local'),
     }
   },
   methods: {
     async removeRule() {
       const config = {
         headers: {
-          'Content-Type': 'application/json-patch+json',
-          Authorization: 'qwertyuiop', //Change this
+          'Content-Type': 'application/json',
+          Authorization: this.Authorization, //Change this
         },
       }
       var info = {
@@ -79,9 +83,15 @@ export default {
         iport: this.iport,
       }
       console.log(info)
-      // try {
-      //   let res = await axios.patch(this.url, info, config)
-      // } catch (error) {}
+      try {
+        let res = await axios.patch(
+          this.url + this.$route.params.id,
+          info,
+          config
+        )
+      } catch (error) {
+        console.log(error)
+      }
     },
   },
 }
