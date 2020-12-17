@@ -35,7 +35,8 @@ export default {
     return {
       dialog: false,
       usrInput: null,
-      url: 'ChangeThistoAPI.com',
+      url: 'https://api.quix.click/api/v1/client/backends/modify?id=',
+      Authorization: this.$auth.$storage.getState('_token.local'),
     }
   },
   methods: {
@@ -44,13 +45,13 @@ export default {
       const config = {
         headers: {
           'Content-Type': 'application/json-patch+json',
-          Authorization: 'qwertyuiop', //Change this
+          Authorization: this.Authorization, //Change this
         },
       }
       var info = {
         cmd: [
           {
-            op: 'modify',
+            op: 'modify_kv',
             data: {},
           },
         ],
@@ -60,9 +61,16 @@ export default {
 
       if (this.usrInput != null) {
         try {
-          let res = await axios.patch(this.url, info, config)
-        } catch (error) {}
-        this.$emit('item-Changed', this.jsKey, this.usrInput)
+          let res = await axios.patch(
+            this.url + this.$route.params.id,
+            JSON.stringify(info),
+            config
+          )
+          console.log("Text Dialog:",res)
+        } catch (error) {
+          console.log(error)
+        }
+        this.$emit('item-changed', this.jsKey, this.usrInput)
       }
     },
   },

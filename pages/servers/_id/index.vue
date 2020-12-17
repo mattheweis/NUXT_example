@@ -11,7 +11,7 @@
         class="ma-2 alignright"
         :field="'Change Servername'"
         :jsKey="'name'"
-        @item-Changed="updateContent"
+        @item-changed="updateContent"
       />
     </v-row>
     <v-row class="box ma-2">
@@ -22,7 +22,7 @@
         class="ma-2 alignright"
         :field="'Change Uplink'"
         :jsKey="'uplink'"
-        @item-Changed="updateContent"
+        @item-changed="updateContent"
       />
     </v-row>
     <v-row class="box ma-2">
@@ -38,19 +38,13 @@
         class="ma-2 alignright"
         :field="'Change Location'"
         :jsKey="'location'"
-        @item-Changed="updateContent"
+        @item-changed="updateContent"
       />
     </v-row>
     <v-row>
       <b style="font-size: 1.5rem">Forwarding Rules</b>
-      <AddRulesDialog :ExtIP="serverConfiguration.rules"/>
+      <AddRulesDialog :ExtIP="serverConfiguration.rules" @update="updateContent"/>
     </v-row>
-    <!-- <v-row class="ma-2">
-      <v-col class="box">External IP</v-col>
-      <v-col class="box">Protocol</v-col>
-      <v-col class="box">External Port</v-col>
-      <v-col class="box">Internal Port</v-col>
-    </v-row> -->
     <Rules
       v-for="(index, i) in serverConfiguration.rules"
       :key="i"
@@ -59,8 +53,9 @@
       :eport="index.eport"
       :iport="index.iport"
       class="ma-2"
+      @update="updateContent"
     />
-    <VNC v-if="serverConfiguration.name == 'Bob\'s Server'"/>
+    <VNC v-if="serverConfiguration.name == 'Bobs Server'"/>
   </v-container>
 </template>
 
@@ -83,7 +78,8 @@ export default {
       serverConfiguration: {},
       url:'https://api.quix.click/api/v1/client/backends?id=',
       state: null,
-      Authorization: this.$auth.$storage.getState('_token.local')
+      Authorization: this.$auth.$storage.getState('_token.local'),
+      urlModify:'https://api.quix.click/api/v1/client/backends/modify?id='
     }
   },
   async created() {
@@ -102,19 +98,21 @@ export default {
   },
   methods: {
     updateContent() {
-      setTimeout(this.updateConfig, 1000)
+      setTimeout(this.updateConfig, 200)
+      console.log("Update Content Function")
     },
     async updateConfig(item, newItem) {
       const config = {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: 'qwertyuiop',
+          Authorization: this.Authorization,
         },
       }
       try {
         const res = await axios.get(this.url + this.$route.params.id, config)
         this.serverConfiguration = res.data
         this.$forceUpdate()
+        console.log("Update Page")
       } catch (error) {
         console.log(error)
       }

@@ -78,7 +78,7 @@ export default {
         {
           icon: 'mdi-cash',
           title: 'Pricing',
-          to: '/',
+          to: '/pricing',
         },
         {
           icon: 'mdi-account-group',

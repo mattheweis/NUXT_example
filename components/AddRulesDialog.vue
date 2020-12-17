@@ -78,6 +78,7 @@ export default {
           temp,
           config
         )
+        this.$emit("update",true)
       } catch (error) {
         console.log(error)
       }
