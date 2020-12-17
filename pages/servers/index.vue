@@ -28,6 +28,7 @@ export default {
     }
   },
   async created() {
+    console.log("From Server Page:",this.Authorization)
     // const config = {
     //   headers:{
     //     'Authorization': 'c34c2762e35dad4683db651f67f70d23'

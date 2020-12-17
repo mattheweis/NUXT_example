@@ -106,8 +106,13 @@ export default {
     async logout() {
       await this.$auth.logout()
       this.$router.push('/')
+      this.removeToken()
       this.$forceUpdate()
     },
+    // async removeToken() {
+    //   this.$store.commit('setToken', null)
+    //   console.log("User Token Removed")
+    // },
   },
 }
 </script>

@@ -40,7 +40,7 @@ export default {
       newExtPort: null,
       newIntPort: null,
       dialog: false,
-      url: 'ChangeThis.com',
+      url: 'https://api.quix.click/api/v1/client/backends/modify?id=',
     }
   },
   methods: {
@@ -48,8 +48,8 @@ export default {
       this.dialog = false
       const config = {
         headers: {
-          'Content-Type': 'application/json-patch+json',
-          Authorization: 'qwertyuiop', //Change this
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + this.$store.state.token, //Change this
         },
       }
       var info = {
@@ -65,9 +65,27 @@ export default {
           },
         ],
       }
+      const test = {
+        cmd: [
+          {
+            op: 'create_rule',
+            data: {
+              ext_ip: '1.2.3.4',
+              proto: 'TCP',
+              eport: 9999,
+              iport: 8888,
+            },
+          },
+        ],
+      }
       console.log(info.cmd[0])
+      console.log('USER TOKEN ADD RULE:', this.$store.state.token)
       try {
-        let res = await axios.patch(this.url, info, config)
+        let res = await axios.patch(
+          this.url + this.$route.params.id,
+          test,
+          config
+        )
       } catch (error) {
         console.log(error)
       }

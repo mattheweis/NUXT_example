@@ -65,7 +65,7 @@ export default {
       newExtPort: null,
       newIntPort: null,
       dialog: false,
-      url: 'ChangeThis.com',
+      url: 'https://api.quix.click/api/v1/client/backends/modify?id=',
       isValid: null,
     }
   },
@@ -75,7 +75,7 @@ export default {
       const config = {
         headers: {
           'Content-Type': 'application/json-patch+json',
-          Authorization: 'qwertyuiop', //Change this
+          Authorization: this.$store.state.token, //Change this
         },
       }
       var info = {
@@ -97,12 +97,12 @@ export default {
           },
         ],
       }
-      console.log(info.cmd[0])
-      // try {
-      //   let res = await axios.patch(this.url, info, config)
-      // } catch (error) {
-      //   console.log(error)
-      // }
+      console.log("Edit Rule Component:",info.cmd[0])
+      try {
+        let res = await axios.patch(this.url+this.$route.params.id, info, config)
+      } catch (error) {
+        console.log(error)
+      }
     },
   },
 }
