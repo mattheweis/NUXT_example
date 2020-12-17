@@ -12,12 +12,6 @@
           <v-spacer></v-spacer>
           <v-form v-model="isValid">
             <v-text-field
-              :label="String(curIP)"
-              v-model="newExtIP"
-              required
-              :rules="[(v) => !!v || 'External IP is required']"
-            ></v-text-field>
-            <v-text-field
               :label="curProto"
               v-model="newProto"
               required
@@ -91,7 +85,7 @@ export default {
                 iport: this.curIport,
               },
               to: {
-                ext_ip: this.newExtIP,
+                ext_ip: this.curIP,
                 proto: this.newProto,
                 eport: parseInt(this.newExtPort),
                 iport: parseInt(this.newIntPort),
@@ -107,6 +101,7 @@ export default {
           info,
           config
         )
+        this.$emit('update', true)
       } catch (error) {
         console.log(error)
       }

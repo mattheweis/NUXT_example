@@ -33,6 +33,7 @@
             :curProto="proto"
             :curEport="eport"
             :curIport="iport"
+            @update="updatepage"
           />
         </v-col>
         <v-col class="col-auto">
@@ -94,6 +95,9 @@ export default {
       }
       this.$emit("update",true)
     },
+    updatepage(){
+      this.$emit("update",true)
+    }
   },
 }
 </script>
