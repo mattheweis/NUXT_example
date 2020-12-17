@@ -66,6 +66,7 @@ export default {
       newIntPort: null,
       dialog: false,
       url: 'https://api.quix.click/api/v1/client/backends/modify?id=',
+      Authorization: this.$auth.$storage.getState('_token.local'),
       isValid: null,
     }
   },
@@ -75,31 +76,37 @@ export default {
       const config = {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: this.$auth.$storage.getState('_token.local'), //Change this
+          Authorization: this.Authorization, //Change this
         },
       }
       var info = {
         cmd: [
           {
             op: 'modify_rule',
-            from: {
-              ext_ip: this.curIP,
-              proto: this.curProto,
-              eport: this.curEport,
-              iport: this.curIport,
-            },
-            to: {
-              ext_ip: this.newExtIP,
-              proto: this.newProto,
-              eport: this.newExtPort,
-              iport: this.newIntPort,
+            data: {
+              from: {
+                ext_ip: this.curIP,
+                proto: this.curProto,
+                eport: this.curEport,
+                iport: this.curIport,
+              },
+              to: {
+                ext_ip: this.newExtIP,
+                proto: this.newProto,
+                eport: parseInt(this.newExtPort),
+                iport: parseInt(this.newIntPort),
+              },
             },
           },
         ],
       }
-      console.log("Edit Rule Component:",info.cmd[0])
+      console.log('Edit Rule Component:', info.cmd[0])
       try {
-        let res = await axios.patch(this.url+this.$route.params.id, info, config)
+        let res = await axios.patch(
+          this.url + this.$route.params.id,
+          info,
+          config
+        )
       } catch (error) {
         console.log(error)
       }
