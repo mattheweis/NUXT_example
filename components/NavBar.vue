@@ -80,16 +80,6 @@ export default {
           title: 'Pricing',
           to: '/pricing',
         },
-        {
-          icon: 'mdi-account-group',
-          title: 'About Us',
-          to: '/',
-        },
-        {
-          icon: 'mdi-contacts',
-          title: 'Contact Us',
-          to: '/',
-        },
       ],
       miniVariant: false,
       right: true,
