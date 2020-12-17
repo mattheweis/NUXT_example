@@ -29,13 +29,7 @@ export default {
     //this.$store.state.token   this.$auth.$storage._state
   },
   async created() {
-    //console.log('AuthToken:', this.Authorization)
     console.log('From Server Page:', this.Authorization)
-    // const config = {
-    //   headers:{
-    //     'Authorization': 'c34c2762e35dad4683db651f67f70d23'
-    //   }
-    // }
     try {
       const res = await axios.get(this.url, {
         headers: {
@@ -44,6 +38,7 @@ export default {
       })
       console.log(this.Authorization)
       this.names = res.data.data
+      //console.log("BackendPage:",res)
     } catch (error) {
       console.log(error)
     }

@@ -43,7 +43,7 @@
     </v-row>
     <v-row>
       <b style="font-size: 1.5rem">Forwarding Rules</b>
-      <AddRulesDialog />
+      <AddRulesDialog :ExtIP="serverConfiguration.rules"/>
     </v-row>
     <!-- <v-row class="ma-2">
       <v-col class="box">External IP</v-col>
@@ -95,7 +95,7 @@ export default {
     try {
       const res = await axios.get(this.url + this.$route.params.id, config)
       this.serverConfiguration = res.data
-      console.log('ServerIDPage:', this.serverConfiguration)
+      console.log("RETURN FROM INDEX",this.serverConfiguration)
     } catch (error) {
       console.log(error)
     }

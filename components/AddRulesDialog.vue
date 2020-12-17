@@ -9,7 +9,8 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-form>
-            <v-text-field label="External IP" v-model="newExtIP"></v-text-field>
+            <!-- <v-text-field label="External IP" v-model="newExtIP"></v-text-field> -->
+            <!-- <v-card-text>{{ ExtIP }}</v-card-text> -->
             <v-text-field label="Protocol" v-model="newProto"></v-text-field>
             <v-text-field
               label="External Port"
@@ -33,6 +34,7 @@
 import axios from 'axios'
 export default {
   name: 'AddRulesDialog',
+  props: ['ExtIP'],
   data() {
     return {
       newExtIP: null,
@@ -53,27 +55,13 @@ export default {
           Authorization: this.Authorization, //Change this
         },
       }
-      var info = {
-        cmd: [
-          {
-            op: 'create_rule',
-            data: {
-              ext_ip: this.newExtIP,
-              proto: this.newProto,
-              eport: this.newExtPort,
-              iport: this.newIntPort,
-            },
-          },
-        ],
-      }
-      console.log(typeof this.newExtIP, this.newExtIP)
-      console.log("TOKEN",this.Authorization)
+      console.log('Debug:', this.ExtIP[0].ext_ip)
       const test = {
         cmd: [
           {
             op: 'create_rule',
             data: {
-              ext_ip: this.newExtIP,
+              ext_ip: this.ExtIP[0].ext_ip,
               proto: this.newProto,
               eport: parseInt(this.newExtPort),
               iport: parseInt(this.newIntPort),
@@ -81,7 +69,7 @@ export default {
           },
         ],
       }
-      
+
       //console.log(info.cmd[0])
       var temp = JSON.stringify(test)
       try {
