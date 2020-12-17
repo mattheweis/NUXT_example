@@ -41,6 +41,7 @@ export default {
       newIntPort: null,
       dialog: false,
       url: 'https://api.quix.click/api/v1/client/backends/modify?id=',
+      Authorization: this.$auth.$storage.getState('_token.local'),
     }
   },
   methods: {
@@ -49,7 +50,7 @@ export default {
       const config = {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + this.$store.state.token, //Change this
+          Authorization: this.Authorization, //Change this
         },
       }
       var info = {
@@ -65,25 +66,27 @@ export default {
           },
         ],
       }
+      console.log(typeof this.newExtIP, this.newExtIP)
       const test = {
         cmd: [
           {
             op: 'create_rule',
             data: {
-              ext_ip: '1.2.3.4',
-              proto: 'TCP',
-              eport: 9999,
-              iport: 8888,
+              ext_ip: this.newExtIP,
+              proto: this.newProto,
+              eport: parseInt(this.newExtPort),
+              iport: parseInt(this.newIntPort),
             },
           },
         ],
       }
-      console.log(info.cmd[0])
-      console.log('USER TOKEN ADD RULE:', this.$store.state.token)
+      
+      //console.log(info.cmd[0])
+      var temp = JSON.stringify(test)
       try {
         let res = await axios.patch(
           this.url + this.$route.params.id,
-          test,
+          temp,
           config
         )
       } catch (error) {

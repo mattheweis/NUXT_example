@@ -1,6 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
+  ssr:true,
   server: {
     port: 3000,
     host: '0.0.0.0'
@@ -70,11 +71,12 @@ export default {
     strategies: {
       local: {
         token: {
-          required: false,
-          type: false
+          prefix:'_token.'
+          //required: false,
+          //type: false
         },
         endpoints: {
-          login: { url: '/api/v1/client/auth', method: 'post' },
+          login: { url: '/api/v1/client/auth', method: 'post'},
           user: false,
           logout: false
         }

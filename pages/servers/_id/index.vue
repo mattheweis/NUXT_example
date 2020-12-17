@@ -80,13 +80,13 @@ export default {
       serverConfiguration: {},
       url:'https://api.quix.click/api/v1/client/backends?id=',
       state: null,
-      Authorization: this.$store.state.token
+      Authorization: this.$auth.$storage.getState('_token.local')
     }
   },
   async created() {
     const config = {
       headers: {
-        Authorization: `token ${this.Authorization}`,
+        Authorization: `${this.Authorization}`,
       },
     }
     try {

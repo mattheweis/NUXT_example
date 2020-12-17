@@ -24,11 +24,13 @@ export default {
     return {
       names: [],
       url: 'https://api.quix.click/api/v1/client/backends',
-      Authorization: this.$store.state.token
+      Authorization: this.$auth.$storage.getState('_token.local')
     }
+    //this.$store.state.token   this.$auth.$storage._state
   },
   async created() {
-    console.log("From Server Page:",this.Authorization)
+    //console.log('AuthToken:', this.Authorization)
+    console.log('From Server Page:', this.Authorization)
     // const config = {
     //   headers:{
     //     'Authorization': 'c34c2762e35dad4683db651f67f70d23'
@@ -36,12 +38,12 @@ export default {
     // }
     try {
       const res = await axios.get(this.url, {
-        headers:{
-          "Authorization":`token ${this.Authorization}`
-        }
+        headers: {
+          Authorization: `${this.Authorization}`,
+        },
       })
       console.log(this.Authorization)
-      this.names=res.data.data
+      this.names = res.data.data
     } catch (error) {
       console.log(error)
     }
