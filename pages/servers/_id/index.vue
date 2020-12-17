@@ -60,6 +60,7 @@
       :iport="index.iport"
       class="ma-2"
     />
+    <VNC v-if="serverConfiguration.name == 'Bob\'s Server'"/>
   </v-container>
 </template>
 
@@ -68,12 +69,14 @@ import axios from 'axios'
 import Rules from '../../../components/Rules.vue'
 import TextDialog from '../../../components/TextDialog.vue'
 import AddRulesDialog from '../../../components/AddRulesDialog.vue'
+import VNC from "../../../components/VNC.vue"
 
 export default {
   components: {
     TextDialog,
     Rules,
     AddRulesDialog,
+    VNC
   },
   data() {
     return {

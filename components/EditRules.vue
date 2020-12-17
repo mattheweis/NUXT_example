@@ -74,8 +74,8 @@ export default {
       this.dialog = false
       const config = {
         headers: {
-          'Content-Type': 'application/json-patch+json',
-          Authorization: this.$store.state.token, //Change this
+          'Content-Type': 'application/json',
+          Authorization: this.$auth.$storage.getState('_token.local'), //Change this
         },
       }
       var info = {
